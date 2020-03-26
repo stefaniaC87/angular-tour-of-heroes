@@ -20,13 +20,11 @@ constructor(
   ) {}
 
   ngOnInit(){
-    /*let scope = this;
-    setTimeout(function (){
-      scope.hero.name = 'Stefania';
-    }, 5000);*/
-    this.getHeroes();
+  
+    //this.getHeroes();
   }
-  getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+  ggetHeroes(): void {
+    this.heroService.getHeroes()
+        .subscribe(heroes => this.heroes = heroes);
   }
 }
