@@ -12,18 +12,21 @@ import { ActivatedRoute } from '@angular/router';
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
   constructor(
-    private route: ActivatedRoute,
+    private routeService: ActivatedRoute,
     private heroService: HeroService,
     private location: Location
   ) {}
 
   ngOnInit(): void {
-    this.getHeroById();
+    this.getHero();
   }
-  getHeroById(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+  getHero(): void {
+    const id = +this.routeService.snapshot.paramMap.get('id');
     this.heroService.getHeroById(id)
       .subscribe(hero => this.hero = hero);
+  }
+  goBack(): void {
+    this.location.back();
   }
 
 }

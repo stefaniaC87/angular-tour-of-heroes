@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,10 +12,14 @@ import { HeroService } from '../hero.service';
 export class DashboardComponent implements OnInit {
   heroes: Hero[] = [];
 
-  constructor(private heroService: HeroService) { }
+  constructor(
+    private httpService: HttpClient,
+    private heroService: HeroService) { }
 
   ngOnInit() {
     this.getHeroes();
+    let httpObservable: Observable<any> =  this.httpService.get<any>('https://jsonplaceholder.typicode.com/posts');
+    httpObservable.subscribe(response => console.log(response));
   }
 
   getHeroes(): void {
